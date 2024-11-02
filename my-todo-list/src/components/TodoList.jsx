@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { TodoInput } from "./TodoInput"
 import TodoBody from "./TodoBody"
+import TodoEdit from "./TodoEdit"
 
 export const TodoList = () => {
 
@@ -10,9 +11,17 @@ export const TodoList = () => {
     {name: 'Learn Coding', checked: false},
   ])
   const [newTask, setNewTask] = useState('')
+  const [editTask, setEditTask] = useState(null)
+  const [editTaskValue, setEditTaskValue] = useState('')
 
   function handleInputChange(event) {
     setNewTask(event.target.value)
+  }
+
+  function checkedTask(event, index) {
+    const updatedTask = [...tasks];
+    updatedTask[index].checked = event.target.checked;
+    setTasks(updatedTask)
   }
 
   function addTasks() {
@@ -24,10 +33,22 @@ export const TodoList = () => {
     }
   }
 
-  function checkedTask(event, index) {
+  function handleEditTask(index) {
+    setEditTask(index);
+    setEditTaskValue(tasks[index].name);
+  }
+
+  function saveEditTask() {
     const updatedTask = [...tasks];
-    updatedTask[index].checked = event.target.checked;
-    setTasks(updatedTask)
+    updatedTask[editTask].name = editTaskValue;
+    setTasks(updatedTask);
+    setEditTask(null)
+    setEditTaskValue('')
+  }
+
+  function deleteTask(index) {
+    const updatedTasks = tasks.filter((_, i) => i !== index);
+    setTasks(updatedTasks)
   }
 
   return (
@@ -40,7 +61,20 @@ export const TodoList = () => {
           handleInputChange={handleInputChange}
         />
       </header>
-      <TodoBody tasks={tasks} checkedTask={checkedTask} />
+      <TodoBody 
+        tasks={tasks} 
+        checkedTask={checkedTask} 
+        handleEditTask={handleEditTask}
+        deleteTask={deleteTask}
+      />
+      
+      {editTask !== null && (
+        <TodoEdit 
+          editTaskValue={editTaskValue}
+          setEditTaskValue={setEditTaskValue}
+          saveEditTask={saveEditTask}
+        />
+      )}
     </>
   )
 }
