@@ -1,18 +1,45 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { TodoInput } from "./TodoInput"
 import TodoBody from "./TodoBody"
 import TodoEdit from "./TodoEdit"
 
 export const TodoList = () => {
 
-  const [tasks, setTasks] = useState([
-    {name: 'Meditate', checked: false},
-    {name: 'Exercise', checked: false},
-    {name: 'Learn Coding', checked: false},
-  ])
+  const [tasks, setTasks] = useState([])
   const [newTask, setNewTask] = useState('')
   const [editTask, setEditTask] = useState(null)
   const [editTaskValue, setEditTaskValue] = useState('')
+
+  // Manage checked sorting list
+  useEffect(() => {
+    function sortTasks(tasks) {
+      return tasks.sort((a, b) => {
+        if (a.checked - b.checked) {
+          return a.checked - b.checked;
+        }
+      })
+    }
+
+    const sortedTasks = sortTasks([...tasks]);
+    // Only update state if sorted tasks are changing
+    if (JSON.stringify(tasks) !== JSON.stringify(sortedTasks)) {
+      setTasks(sortedTasks);
+    }
+  }, [tasks]);
+
+  // To get the task from localStorage
+  useEffect(() => {
+    const localTasks = localStorage.getItem('tasks');
+    if (localTasks) {
+      const parsedTasks = JSON.parse(localTasks);
+      setTasks(parsedTasks);
+    }
+  }, [])
+
+  // To save the task to localStorage
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+  }, [tasks])
 
   function handleInputChange(event) {
     setNewTask(event.target.value)
