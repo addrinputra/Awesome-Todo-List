@@ -38,7 +38,9 @@ export const TodoList = () => {
 
   // To save the task to localStorage
   useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
+    if (tasks.length > 0) {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
   }, [tasks])
 
   function handleInputChange(event) {
@@ -75,6 +77,9 @@ export const TodoList = () => {
 
   function deleteTask(index) {
     const updatedTasks = tasks.filter((_, i) => i !== index);
+    if (updatedTasks.indexOf(0)) {
+      localStorage.clear()
+    }
     setTasks(updatedTasks)
   }
 
