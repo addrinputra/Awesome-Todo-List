@@ -102,6 +102,7 @@ export const TodoList = () => {
       
       {editTask !== null && (
         <TodoEdit 
+          setEditTask={setEditTask}
           editTaskValue={editTaskValue}
           setEditTaskValue={setEditTaskValue}
           saveEditTask={saveEditTask}
