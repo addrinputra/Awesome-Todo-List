@@ -5,5 +5,135 @@ body {
 }
 
 header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   margin-top: 2rem;
+  margin-bottom: 1rem;
+  min-width: 800px;
+  border-bottom: 2px solid #d6d6d6;
 }
+
+header h1 {
+  font-size: 40px;
+}
+
+.inputList {
+  width: 60%;
+}
+
+.inputList input {
+  width: 80%;
+  padding: 8px 10px;
+  border: 1px solid #525252;
+  font-family: monospace;
+}
+
+.inputList input:hover {
+  border: 1px solid black;
+}
+
+.inputList input:focus {
+  border: 1px solid black;
+}
+
+.inputList button {
+  color: #000000;
+  font-weight: bold;
+  outline: #000;
+  background-color: #9affa7;
+  border: 1px solid #000;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 9px 20px;
+  margin-left: 3px;
+  font-family: monospace;
+}
+
+.inputList button:hover {
+  opacity: 0.7;
+}
+
+.counter-container {
+  display: flex;
+  width: 450px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 5px 0 10px 0;
+}
+
+.counter-container p {
+  font-size: 14px;
+  color: gray;
+}
+
+.total-counter {
+  color: slateblue;
+}
+
+.remaining-counter {
+  color: orangered;
+}
+
+.tasksBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+}
+
+.taskList {
+  margin-bottom: 10px;
+  min-width: 800px;
+  max-width: 800px;
+  border-bottom: 1px solid hsla(0, 0%, 85%, 0.75);
+  display: flex;
+  align-items: center;
+}
+
+.taskName {
+  flex: 1;
+  font-size: 16px;
+  margin-left: 5px;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.editButton {
+  background-color: #80e1ff;
+  font-weight: bold;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 8px 16px;
+  margin-left: 5px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+.deleteButton {
+  margin-right: 10px;
+  background-color: #ff6c6c;
+  /* color: white; */
+  font-weight: bold;
+  outline: none;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-family: monospace;
+}
+
+.editButton:hover {
+  opacity: 0.5;
+}
+
+.deleteButton:hover {
+  opacity: 0.5;
+}
+

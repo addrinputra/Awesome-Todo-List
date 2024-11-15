@@ -4,21 +4,22 @@ export default function TodoBody(props) {
   const { tasks, checkedTask, handleEditTask, deleteTask } = props;
 
   return (
-    <section>
+    <section className='tasksBody'>
         {tasks.map((taskList, index) => {
           return(
-            <div key={index}>
+            <div key={index} className='taskList'>
               <input 
                 type="checkbox" 
                 checked={taskList.checked} 
                 onChange={(event) => checkedTask(event, index)}
               />
-              <span>{taskList.name}</span>
-              <button onClick={() => handleEditTask(index)}>
+              <span className='taskName'>{taskList.name}</span>
+              <button onClick={() => handleEditTask(index)} className='editButton'>
                 Edit
               </button>
               <button
                 onClick={() => deleteTask(index)}
+                className='deleteButton'
               >
                 Delete
               </button>

@@ -86,7 +86,7 @@ export const TodoList = () => {
   return (
     <>
       <header>
-        <h1>Your Todo List</h1>
+        <h1>My Todo List</h1>
         <TodoInput
           newTask={newTask} 
           addTasks={addTasks}

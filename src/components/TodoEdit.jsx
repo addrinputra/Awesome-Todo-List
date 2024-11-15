@@ -4,7 +4,7 @@ export default function TodoEdit(props) {
   const { saveEditTask, editTaskValue, setEditTaskValue} = props
 
   return (
-    <div>
+    <div className='editForm'>
       <h2>Editing Task...</h2>
       <div>
         <input 
