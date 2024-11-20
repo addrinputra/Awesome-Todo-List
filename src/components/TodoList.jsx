@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { TodoInput } from "./TodoInput"
+import { FaPlus } from 'react-icons/fa'
 import TodoBody from "./TodoBody"
 import TodoEdit from "./TodoEdit"
 
@@ -9,6 +10,11 @@ export const TodoList = () => {
   const [newTask, setNewTask] = useState('')
   const [editTask, setEditTask] = useState(null)
   const [editTaskValue, setEditTaskValue] = useState('')
+
+  const [totalCount, setTotalCount] = useState(0);
+  const [remainingCount, setRemainingCount] = useState(50);
+
+  const editInputRef = useRef(null)
 
   // Manage checked sorting list
   useEffect(() => {
@@ -57,6 +63,8 @@ export const TodoList = () => {
     if (newTask.trim() !== '') {
       setTasks(t => [...t, {name: newTask, checked: false}]);
       setNewTask('');
+      setTotalCount(0)
+      setRemainingCount(50)
     } else {
       alert('You need to add something first!')
     }
@@ -65,6 +73,9 @@ export const TodoList = () => {
   function handleEditTask(index) {
     setEditTask(index);
     setEditTaskValue(tasks[index].name);
+    setTimeout(() => {
+      editInputRef.current.focus();
+    }, 0);
   }
 
   function saveEditTask() {
@@ -83,6 +94,12 @@ export const TodoList = () => {
     setTasks(updatedTasks)
   }
 
+  function handleEditKeyDown(event) {
+    if (event.key === 'Enter') {
+      saveEditTask();
+    }
+  }
+
   return (
     <>
       <header>
@@ -91,21 +108,37 @@ export const TodoList = () => {
           newTask={newTask} 
           addTasks={addTasks}
           handleInputChange={handleInputChange}
+          totalCount={totalCount}
+          setTotalCount={setTotalCount}
+          remainingCount={remainingCount}
+          setRemainingCount={setRemainingCount}
         />
       </header>
-      <TodoBody 
-        tasks={tasks} 
-        checkedTask={checkedTask} 
-        handleEditTask={handleEditTask}
-        deleteTask={deleteTask}
-      />
-      
+      {tasks.length !== 0 ? (
+        <TodoBody 
+          tasks={tasks} 
+          checkedTask={checkedTask} 
+          handleEditTask={handleEditTask}
+          deleteTask={deleteTask}
+        />
+      ) : (
+        <section className="no-task-section">
+          <div className="no-task">
+            <h1>You don&apos;t have a task yet</h1>
+            <div className="no-task-prompt">
+              <FaPlus className="plus-icon"/>
+            </div>
+          </div>
+        </section>
+      )}
       {editTask !== null && (
         <TodoEdit 
           setEditTask={setEditTask}
           editTaskValue={editTaskValue}
           setEditTaskValue={setEditTaskValue}
           saveEditTask={saveEditTask}
+          handleEditKeyDown={handleEditKeyDown}
+          editInputRef={editInputRef}
         />
       )}
     </>

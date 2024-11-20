@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 
 export default function TodoEdit(props) {
-  const { saveEditTask, editTaskValue, setEditTaskValue, setEditTask} = props
+  const { saveEditTask, editTaskValue, setEditTaskValue, setEditTask, handleEditKeyDown, editInputRef} = props
 
   return (
     <div className='edit-overlay' onClick={() => setEditTask(null)}>
-      <div className='edit-popup'>
+      <div className='edit-popup' onClick={(e) => e.stopPropagation()}>
         <button className="close-button" onClick={() => {
           setEditTaskValue("")
           setEditTask(null)
@@ -18,6 +18,8 @@ export default function TodoEdit(props) {
             type="text" 
             value={editTaskValue}
             onChange={(e) => setEditTaskValue(e.target.value)}
+            onKeyDown={handleEditKeyDown}
+            ref={editInputRef}
           />
           <button 
             className='save-button' 
@@ -36,4 +38,6 @@ TodoEdit.propTypes = {
   setEditTask: PropTypes.func.isRequired,
   editTaskValue: PropTypes.string.isRequired,
   setEditTaskValue: PropTypes.func.isRequired,
+  handleEditKeyDown: PropTypes.func.isRequired,
+  editInputRef: PropTypes.func.isRequired,
 }

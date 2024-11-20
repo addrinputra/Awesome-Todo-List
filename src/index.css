@@ -17,11 +17,12 @@ header {
 }
 
 header h1 {
-  font-size: 40px;
+  font-size: 48px;
 }
 
 .inputList {
   width: 60%;
+  margin-top: -5px;
 }
 
 .inputList input {
@@ -222,4 +223,48 @@ header h1 {
   color: #ff0000; /* Highlight in red on hover */
 }
 
+/* No Task Prompt */
+.no-task-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
 
+.no-task {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  border-radius: 10px;
+  
+}
+
+.no-task h1 {
+  font-size: 1.5rem;
+  color: #b4b4b4;
+}
+
+.no-task-prompt {
+  background-color: #e0e0e0;
+  width: 100%;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+}
+
+.no-task-prompt:hover {
+  background-color: #d6d6d6;
+}
+
+.plus-icon {
+  color: #b4b4b4;
+  font-size: 50px;
+}

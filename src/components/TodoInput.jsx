@@ -1,28 +1,19 @@
 import PropTypes from 'prop-types'
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, } from 'react';
 
 export const TodoInput = (props) => {
 
-  const { newTask, addTasks, handleInputChange } = props;
+  const { 
+    newTask, 
+    addTasks, 
+    handleInputChange, 
+    totalCount, 
+    setTotalCount,
+    remainingCount,
+    setRemainingCount
+  } = props;
 
   const inputRef = useRef(null);
-  const [totalCount, setTotalCount] = useState(0);
-  const [remainingCount, setRemainingCount] = useState(50);
-
-  // const inputEl = document.getElementById('inputElement');
-  // const totalCounterEl = document.getElementById('total-counter');
-  // const remainingCounterEl = document.getElementById('remaining-counter');
-
-  // inputEl.addEventListener('keyup', () => {
-  //   updateCounter()
-  // })
-
-  // updateCounter()
-
-  // function updateCounter() {
-  //   totalCounterEl.innerText = inputEl.value.length; 
-  //   remainingCounterEl.innerText = inputEl.getAttribute('maxLength') - inputEl.value.length
-  // }
 
   // Update counter whenever input changes
   function updateCounter() {
@@ -43,6 +34,12 @@ export const TodoInput = (props) => {
     }
   }, [])
 
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      addTasks();
+    }
+  }
+
   return (
     <>
       <div className='inputList'>
@@ -53,6 +50,7 @@ export const TodoInput = (props) => {
             handleInputChange(e);
             updateCounter();
           }} 
+          onKeyDown={handleKeyDown}
           value={newTask} 
           maxLength={50}
           ref={inputRef}
@@ -74,7 +72,11 @@ export const TodoInput = (props) => {
 }
 
 TodoInput.propTypes = {
-  newTask: PropTypes.string,
-  addTasks: PropTypes.func,
-  handleInputChange: PropTypes.func,
+  newTask: PropTypes.string.isRequired,
+  addTasks: PropTypes.func.isRequired,
+  handleInputChange: PropTypes.func.isRequired,
+  totalCount: PropTypes.number.isRequired,
+  setTotalCount: PropTypes.func.isRequired,
+  remainingCount: PropTypes.number.isRequired,
+  setRemainingCount: PropTypes.func.isRequired,
 }
