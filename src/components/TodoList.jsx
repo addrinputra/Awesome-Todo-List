@@ -3,6 +3,8 @@ import { TodoInput } from "./TodoInput"
 import { FaPlus } from 'react-icons/fa'
 import TodoBody from "./TodoBody"
 import TodoEdit from "./TodoEdit"
+import { toast, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 export const TodoList = () => {
 
@@ -14,7 +16,19 @@ export const TodoList = () => {
   const [totalCount, setTotalCount] = useState(0);
   const [remainingCount, setRemainingCount] = useState(50);
 
+  const inputRef = useRef(null);
   const editInputRef = useRef(null)
+  
+  const [isClicked, setIsClicked] = useState(false)
+
+  // When the No Task container get clicked, it will directed to the input
+  function focusInput() {
+    inputRef.current?.focus();
+    setIsClicked(true)
+    setTimeout(() => {
+      setIsClicked(false)
+    }, 100);
+  }
 
   // Manage checked sorting list
   useEffect(() => {
@@ -65,8 +79,9 @@ export const TodoList = () => {
       setNewTask('');
       setTotalCount(0)
       setRemainingCount(50)
+      toast.success('Task added successfully')
     } else {
-      alert('You need to add something first!')
+      toast.warning('You need to add something first!')
     }
   }
 
@@ -84,6 +99,7 @@ export const TodoList = () => {
     setTasks(updatedTask);
     setEditTask(null)
     setEditTaskValue('')
+    toast.success('Task updated')
   }
 
   function deleteTask(index) {
@@ -92,6 +108,7 @@ export const TodoList = () => {
       localStorage.clear()
     }
     setTasks(updatedTasks)
+    toast.error('Task deleted successfully')
   }
 
   function handleEditKeyDown(event) {
@@ -102,6 +119,7 @@ export const TodoList = () => {
 
   return (
     <>
+      <ToastContainer />
       <header>
         <h1>My Todo List</h1>
         <TodoInput
@@ -112,6 +130,7 @@ export const TodoList = () => {
           setTotalCount={setTotalCount}
           remainingCount={remainingCount}
           setRemainingCount={setRemainingCount}
+          inputRef={inputRef}
         />
       </header>
       {tasks.length !== 0 ? (
@@ -125,7 +144,10 @@ export const TodoList = () => {
         <section className="no-task-section">
           <div className="no-task">
             <h1>You don&apos;t have a task yet</h1>
-            <div className="no-task-prompt">
+            <div 
+              className={`no-task-prompt ${isClicked ? 'clicked' : ''}`} 
+              onClick={focusInput}
+            >
               <FaPlus className="plus-icon"/>
             </div>
           </div>

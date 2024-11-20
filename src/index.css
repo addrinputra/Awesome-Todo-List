@@ -264,6 +264,12 @@ header h1 {
   background-color: #d6d6d6;
 }
 
+.no-task-prompt.clicked {
+  background-color: #cecece;
+}
+
+
+
 .plus-icon {
   color: #b4b4b4;
   font-size: 50px;

@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { useEffect, useRef, } from 'react';
+import { useEffect, } from 'react';
 
 export const TodoInput = (props) => {
 
@@ -10,10 +10,9 @@ export const TodoInput = (props) => {
     totalCount, 
     setTotalCount,
     remainingCount,
-    setRemainingCount
+    setRemainingCount,
+    inputRef
   } = props;
-
-  const inputRef = useRef(null);
 
   // Update counter whenever input changes
   function updateCounter() {
@@ -79,4 +78,5 @@ TodoInput.propTypes = {
   setTotalCount: PropTypes.func.isRequired,
   remainingCount: PropTypes.number.isRequired,
   setRemainingCount: PropTypes.func.isRequired,
+  inputRef: PropTypes.func.isRequired,
 }
