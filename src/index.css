@@ -12,7 +12,7 @@ header {
   text-align: center;
   margin-top: 2rem;
   margin-bottom: 1rem;
-  min-width: 800px;
+  width: 800px;
   border-bottom: 2px solid #d6d6d6;
 }
 
@@ -84,13 +84,14 @@ header h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  max-width: 800px;
+  /* max-width: 800px; */
 }
 
 .taskList {
   margin-bottom: 10px;
-  min-width: 800px;
-  max-width: 800px;
+  /* min-width: 800px;
+  max-width: 800px; */
+  width: 95%;
   border-bottom: 1px solid hsla(0, 0%, 85%, 0.75);
   display: flex;
   align-items: center;
@@ -100,7 +101,7 @@ header h1 {
   flex: 1;
   font-size: 16px;
   margin-left: 5px;
-  max-width: 100%;
+  /* max-width: 100%; */
   overflow: hidden;
 }
 
@@ -273,4 +274,114 @@ header h1 {
 .plus-icon {
   color: #b4b4b4;
   font-size: 50px;
+}
+
+@media (max-width: 640px) {
+  header {
+    max-width: 400px;
+  }
+
+  header h1 {
+    font-size: 32px;
+  }
+
+  .inputList {
+    width: 100%;
+  }
+
+  .inputList input {
+    width: 50%;
+  }
+
+  .counter-container {
+    width: 300px;
+  }
+
+  .counter-container p {
+    font-size: 12px;
+  }
+
+  .no-task {
+    max-width: 90%;
+  }
+
+  .no-task h1 {
+    font-size: 1rem;
+  }
+
+  .no-task-prompt {
+    height: 250px;
+  }
+
+  .tasksBody {
+    width: 100%;
+  }
+
+  .taskList {
+    width: 88%;
+  }
+
+  .taskName {
+    font-size: 12px;
+  }
+
+  .editButton {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .deleteButton {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .edit-popup {
+    width: 300px;
+  }
+
+  .edit-popup h2{
+    font-size: 28px;
+  }
+
+  .edit-popup input {
+    width: 200px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  header {
+    max-width: 580px;
+  }
+
+  header h1 {
+    font-size: 32px;
+  }
+
+  .inputList {
+    width: 100%;
+  }
+
+  .inputList input {
+    width: 50%;
+  }
+
+  .counter-container {
+    width: 70%;
+  }
+
+  .counter-container p {
+    font-size: 12px;
+  }
+
+  .no-task {
+    width: 90%;
+  }
+
+  .tasksBody {
+    width: 100%;
+  }
+
+  .taskList {
+    width: 90%;
+  }
 }
